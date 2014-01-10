@@ -75,7 +75,7 @@ public class ChatWindow extends JFrame
 	} // end constructor
 
 	// =========================================
-	// Constructor
+	// Constructor - incoming connection
 	// =========================================
 	public ChatWindow(Socket i)
 	{
@@ -141,8 +141,7 @@ public class ChatWindow extends JFrame
 		if (INCOMMING_CONNECTION)
 		{
 			// label Computer Name
-			lblHostName
-					.setToolTipText("Enter the Computer Name that you wish to connect to");
+			lblHostName.setToolTipText("The Computer Name");
 			CONSTRAINTS.gridx = 0;
 			CONSTRAINTS.gridy = 0;
 			mainPanel.add(lblHostName, CONSTRAINTS);
@@ -150,14 +149,13 @@ public class ChatWindow extends JFrame
 			// text Computer Name
 			txtComputerName.setColumns(12);
 			txtComputerName.setText("localhost");
-			txtComputerName
-					.setToolTipText("Enter the Computer Name that you wish to connect to");
+			txtComputerName.setToolTipText("Enter the Computer Name");
 			CONSTRAINTS.gridx = 1;
 			CONSTRAINTS.gridy = 0;
 			mainPanel.add(txtComputerName, CONSTRAINTS);
 
 			// label Port
-			lblPort.setToolTipText("Enter the port number");
+			lblPort.setToolTipText("The port number");
 			CONSTRAINTS.gridx = 0;
 			CONSTRAINTS.gridy = 1;
 			mainPanel.add(lblPort, CONSTRAINTS);
