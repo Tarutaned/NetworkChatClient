@@ -8,7 +8,8 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		new ChatWindow();
+		//new ChatWindow();
+		new MainWindow();
 
 		int i = 1;
 		ServerSocket s;
