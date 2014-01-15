@@ -12,12 +12,14 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -26,7 +28,8 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
-public class MainWindow extends Frame implements WindowListener, ActionListener
+public class MainWindow extends Frame implements WindowListener, ActionListener, KeyListener
+
 {
 	private JLabel				lblComputerName, lblPort;
 	private JTextField			txtComputerName, txtPort;
@@ -34,8 +37,7 @@ public class MainWindow extends Frame implements WindowListener, ActionListener
 	private JButton				btnConnect;
 	private GridBagConstraints	CONSTRAINTS;
 	private Style				style;
-	private JMenuBar			mainMenuBar;
-	private JMenu				fileMenu;
+
 	
 	public MainWindow()
 	{
@@ -46,15 +48,11 @@ public class MainWindow extends Frame implements WindowListener, ActionListener
 	
 	private void displayWindow()
 	{
-		mainMenuBar = new JMenuBar();
-		fileMenu = new JMenu("File Menu");
-		fileMenu.setMnemonic(KeyEvent.VK_F);
-		fileMenu.add(new JMenuItem("Exit", KeyEvent.VK_X));
-		
-		
-		
-		
-		
+				JMenuBar menuBar;
+				JMenu File;
+				JMenuItem fmOpen, fmSave, fmConnect, fmDisconnect, fmExit;
+				
+				
 		
 		
 		
@@ -110,6 +108,7 @@ public class MainWindow extends Frame implements WindowListener, ActionListener
 		mainPanel.add(btnConnect, CONSTRAINTS);
 
 		// mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+		
 		this.add(mainPanel, BorderLayout.CENTER);
 		this.pack();
 		this.setSize(400, 600);
@@ -179,4 +178,38 @@ public class MainWindow extends Frame implements WindowListener, ActionListener
 
 	}
 
+	
+	private JMenuBar createMenu()
+	{
+		 JMenuBar menuBar;
+	        JMenu menu, submenu;
+	        JMenuItem menuItem;
+	        JRadioButtonMenuItem rbMenuItem;
+	        JCheckBoxMenuItem cbMenuItem;
+	 
+	        //Create the menu bar.
+	        menuBar = new JMenuBar();
+	 
+	        //Build the file menu.
+	        menu = new JMenu("File");
+	        menuBar.add(menu);
+	       
+	        // add items to the file menu
+	        menuItem = new JMenuItem("New Connection");
+	        menuItem.addActionListener(this);
+	        menu.add(menuItem);
+	        
+	        menuItem = new JMenuItem("Disconnect");
+	        menuItem.addActionListener(this);
+	        menu.add(menuItem);
+	                        
+	        menuItem = new JMenuItem("Exit");
+	        menuItem.addActionListener(this);
+	        menu.add(menuItem);
+	        
+	        return menuBar;
+	}
+	
+	
+	
 }
