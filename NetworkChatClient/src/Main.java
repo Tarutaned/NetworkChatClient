@@ -8,27 +8,12 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		//new ChatWindow();
-		new MainWindow();
-
-		int i = 1;
-		ServerSocket s;
-		try
-		{
-			s = new ServerSocket(LISTEN_PORT);
-			while (true)
-			{
-				Socket incoming = s.accept();
-				System.out.println("Spawning Incomming Connection " + i);
-				new ChatWindow(incoming);
-				i++;
-
-			} // end while
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+		
+		 java.awt.EventQueue.invokeLater(new Runnable() {
+             public void run() {
+		MainWindow theApp = new MainWindow();
+		theApp.setVisible(true);
+             }
+		 });
 	}
 }
