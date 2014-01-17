@@ -1,8 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -24,54 +19,53 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 
 public class MainWindow extends JFrame implements WindowListener,
 		ActionListener, KeyListener
-
 {
-	ChatServer cs;
+	private static final int	LISTEN_PORT	= 4321;
+
+	ChatServer					cs;
 
 	public MainWindow()
 	{
 		super("Network Chat Client");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(this);
 		this.setJMenuBar(createMenuBar());
 		this.setContentPane(createContentPane());
 		this.setResizable(false);
 		this.pack();
-		//this.setSize(400, 600);
+		// this.setSize(400, 600);
 		this.setVisible(true);
-		
 		cs = new ChatServer();
-		
-		
 	}
 
-	public Container createContentPane()
+	private Container createContentPane()
 	{
-		 JLabel				lblUserList, lblPort, lblConnections;
-		 JTextField			txtComputerName, txtPort;
-		 JScrollPane		jsp;
-		 JButton			btnConnect;
-		 Style				style;
+		JLabel lblListenPort;
+		JTextField txtPort;
+		//JTextField txtComputerName, txtPort;
+		//JScrollPane jsp;
+		JButton btnStartServer;
+		//Style style;
+
+		JPanel mainPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints CONSTRAINTS = new GridBagConstraints();
+		CONSTRAINTS.insets = new Insets(15, 15, 15, 15);
+
 		
-		 JPanel mainPanel = new JPanel(new GridBagLayout());
-		 GridBagConstraints CONSTRAINTS = new GridBagConstraints();
-		 CONSTRAINTS.insets = new Insets(15,15,15,15);
-		 
+		lblListenPort = new JLabel("Listen on Port");
+		mainPanel.add(lblListenPort, CONSTRAINTS);
 		
-		 lblUserList = new JLabel("Contact List:");
-		 mainPanel.add(lblUserList, CONSTRAINTS);
-		
-		
-		
+		txtPort = new JTextField();
+		txtPort.setText(Integer.toString(LISTEN_PORT));
+		mainPanel.add(txtPort, CONSTRAINTS);
+
+		btnStartServer = new JButton("Start Server");
+		mainPanel.add(btnStartServer,CONSTRAINTS);
 		
 		return mainPanel;
 	} // end displayWindow()
@@ -93,15 +87,12 @@ public class MainWindow extends JFrame implements WindowListener,
 
 		// add items to the file menu
 		menuItem = new JMenuItem("New Connection");
-		menuItem.addActionListener(this);
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Disconnect");
-		menuItem.addActionListener(this);
+		menuItem = new JMenuItem("Start Server");
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Exit");
-		menuItem.addActionListener(this);
 		menu.add(menuItem);
 
 		return menuBar;
@@ -110,7 +101,10 @@ public class MainWindow extends JFrame implements WindowListener,
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
-		// TODO Auto-generated method stub
+		  JMenuItem source = (JMenuItem)(arg0.getSource());
+	       System.out.print("Something was pressed");
+		
+		
 
 	}
 
@@ -131,9 +125,8 @@ public class MainWindow extends JFrame implements WindowListener,
 	@Override
 	public void windowClosing(WindowEvent arg0)
 	{
-		// TODO Auto-generated method stub
-		this.dispose();
 
+		System.exit(0);
 	}
 
 	@Override
